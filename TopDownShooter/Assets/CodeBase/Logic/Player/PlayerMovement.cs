@@ -1,6 +1,7 @@
 using Assets.CodeBase.Services;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 namespace Assets.CodeBase.Logic.Player
@@ -30,13 +31,18 @@ namespace Assets.CodeBase.Logic.Player
             _characterController = GetComponent<CharacterController>();
             _playerAnimation = GetComponentInChildren<PlayerAnimation>();
         }
+        private void OnEnable() =>
+            _inputService.OnShoot += OnShoot;
+        private void OnDisable() =>
+            _inputService.OnShoot -= OnShoot;
         private void Update()
         {
             ApplyMovement();
             AimRotate();
             AnimationController();
         }
-
+        private void OnShoot() =>
+            _playerAnimation.Shoot();
         private void AimRotate()
         {
             Ray ray = Camera.main.ScreenPointToRay(_inputService._aimInput);
@@ -48,10 +54,9 @@ namespace Assets.CodeBase.Logic.Player
 
                 transform.forward = _lookingDirection;
 
-                _aim.position = new Vector3(raycastHit.point.x, transform.position.y, raycastHit.point.z);
+                _aim.position = new Vector3(raycastHit.point.x, _aim.position.y, raycastHit.point.z);
             }
         }
-
         private void AnimationController()
         {
             float xVelocity = Vector3.Dot(_moveDirection, transform.right);
@@ -59,7 +64,6 @@ namespace Assets.CodeBase.Logic.Player
 
             _playerAnimation.Move(xVelocity, zVelocity);
         }
-
         private void ApplyMovement()
         {
             _moveDirection = new Vector3(_inputService._moveInput.x, 0, _inputService._moveInput.y);
@@ -69,7 +73,6 @@ namespace Assets.CodeBase.Logic.Player
                 _characterController.Move(_moveDirection * _speed * Time.deltaTime);
             }
         }
-
         private void ApplyGravity()
         {
             if (!_characterController.isGrounded)
