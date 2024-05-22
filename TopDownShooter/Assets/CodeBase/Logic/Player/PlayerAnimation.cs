@@ -5,6 +5,8 @@ public class PlayerAnimation : MonoBehaviour
     private static readonly int _xVelocity = Animator.StringToHash("xVelocity");
     private static readonly int _zVelocity = Animator.StringToHash("zVelocity");
     private static readonly int Fire = Animator.StringToHash("Fire");
+    private static readonly int Reloading = Animator.StringToHash("Reloading");
+
     private Animator _animator;
     private void Awake()
     {
@@ -17,4 +19,6 @@ public class PlayerAnimation : MonoBehaviour
     }
     public void Shoot() =>
         _animator.SetTrigger(Fire);
+    public void Reload() =>
+        _animator.SetTrigger(Reloading);
 }
