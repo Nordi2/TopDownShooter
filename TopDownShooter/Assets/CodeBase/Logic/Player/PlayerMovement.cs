@@ -1,26 +1,19 @@
 using Assets.CodeBase.Services;
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 using Zenject;
 
 namespace Assets.CodeBase.Logic.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
-        private InputService _inputService;
-        private PlayerAnimation _playerAnimation;
         [Header("Movement Info")]
         [SerializeField] private float _speed;
         private CharacterController _characterController;
         private Vector3 _moveDirection;
         private float _verticalVelocity;
 
-        [Header("Looking Info")]
-        [SerializeField] private LayerMask _layerMask;
-        [SerializeField] private Transform _aim;
-        private Vector3 _lookingDirection;
-
+        private InputService _inputService;
+        private PlayerAnimation _playerAnimation;
         [Inject]
         public void Construct(InputService inputServic)
         {
@@ -38,25 +31,10 @@ namespace Assets.CodeBase.Logic.Player
         private void Update()
         {
             ApplyMovement();
-            AimRotate();
             AnimationController();
         }
         private void OnShoot() =>
             _playerAnimation.Shoot();
-        private void AimRotate()
-        {
-            Ray ray = Camera.main.ScreenPointToRay(_inputService._aimInput);
-            if (Physics.Raycast(ray,out RaycastHit raycastHit,Mathf.Infinity,_layerMask))
-            {
-                _lookingDirection = raycastHit.point - transform.position;
-                _lookingDirection.y = 0;
-                _lookingDirection.Normalize();
-
-                transform.forward = _lookingDirection;
-
-                _aim.position = new Vector3(raycastHit.point.x, _aim.position.y, raycastHit.point.z);
-            }
-        }
         private void AnimationController()
         {
             float xVelocity = Vector3.Dot(_moveDirection, transform.right);

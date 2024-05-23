@@ -10,7 +10,8 @@ namespace Assets.CodeBase.Services
         public Vector2 _moveInput { get; private set; }
         public Vector2 _aimInput { get; private set; }
 
-        public event UnityAction OnShoot; 
+        public event UnityAction OnShoot;
+        public event UnityAction OnReload;
         private void Awake()
         {
             _playerController = new PlayerController();
@@ -22,14 +23,11 @@ namespace Assets.CodeBase.Services
             _playerController.Character.Aim.canceled += context => _aimInput = Vector2.zero;
 
             _playerController.Character.Fire.performed += context => OnShoot?.Invoke();
+            _playerController.Character.Reload.performed += context => OnReload?.Invoke();
         }
-        private void OnEnable()
-        {
+        private void OnEnable() =>
             _playerController.Enable();
-        }
-        private void OnDisable()
-        {
+        private void OnDisable() =>
             _playerController.Disable();
-        }
     }
 }

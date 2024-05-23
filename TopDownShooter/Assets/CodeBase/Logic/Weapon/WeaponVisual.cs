@@ -1,6 +1,8 @@
 using Assets.CodeBase.Logic;
+using Assets.CodeBase.Services;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using Zenject;
 
 public class WeaponVisual : MonoBehaviour
 {
@@ -15,15 +17,31 @@ public class WeaponVisual : MonoBehaviour
     [SerializeField] private Transform _leftHand;
     private Transform _currentGun;
 
-    [SerializeField]private float _rigInCreaseStep;
+    [SerializeField] private float _rigInCreaseStep;
     private bool _rigShouldBeIncreaseStep;
 
+    private InputService _inputService;
+    private PlayerAnimation _animatorPlayer;
     private Animator _animator;
     private Rig _rig;
+    [Inject]
+    public void Construct(InputService inputService)
+    {
+        _inputService = inputService;
+    }
     private void Awake()
     {
+        _animatorPlayer = GetComponentInChildren<PlayerAnimation>();
         _animator = GetComponentInChildren<Animator>();
         _rig = GetComponentInChildren<Rig>();
+    }
+    private void OnEnable()
+    {
+        _inputService.OnReload += OnReload;
+    }
+    private void OnDisable()
+    {
+        _inputService.OnReload -= OnReload;
     }
     private void Start()
     {
@@ -32,16 +50,10 @@ public class WeaponVisual : MonoBehaviour
     private void Update()
     {
         CheckWeaponSwitch();
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            _animator.SetTrigger("Reloading");
-            _rig.weight = 0;
-        }
         if (_rigShouldBeIncreaseStep)
         {
             _rig.weight += _rigInCreaseStep * Time.deltaTime;
-            if (_rig.weight >=1)
+            if (_rig.weight >= 1)
             {
                 _rigShouldBeIncreaseStep = false;
             }
@@ -49,6 +61,11 @@ public class WeaponVisual : MonoBehaviour
     }
     public void ReturnRigWeightToOne() =>
         _rigShouldBeIncreaseStep = true;
+    private void OnReload()
+    {
+        _animatorPlayer.Reload();
+        _rig.weight = 0;
+    }
     private void SwitchOn(Transform gunTransform)
     {
         OffGuns();
@@ -57,14 +74,14 @@ public class WeaponVisual : MonoBehaviour
 
         AttachLeftHand();
     }
-    private void OffGuns() 
+    private void OffGuns()
     {
         for (int i = 0; i < _allWeapons.Length; i++)
         {
             _allWeapons[i].gameObject.SetActive(false);
         }
     }
-    private void AttachLeftHand() 
+    private void AttachLeftHand()
     {
         Transform targetTransform = _currentGun.GetComponentInChildren<LeftHandTargetTransform>().transform;
 

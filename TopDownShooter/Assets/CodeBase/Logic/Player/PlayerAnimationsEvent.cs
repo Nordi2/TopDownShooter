@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Assets.CodeBase.Logic.Player
 {
-    public class PlayerAniamtionsEvent : MonoBehaviour
+    public class PlayerAnimationsEvent : MonoBehaviour
     {
         private WeaponVisual _weaponVisual;
 
