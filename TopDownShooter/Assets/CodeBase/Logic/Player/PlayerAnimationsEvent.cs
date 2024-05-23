@@ -12,5 +12,14 @@ namespace Assets.CodeBase.Logic.Player
         }
         public void ReloadIsOver() =>
             _weaponVisual.ReturnRigWeightToOne();
+        public void ReturnRig() 
+        {
+            _weaponVisual.MaximizeRigWeight();
+            _weaponVisual.MaximizeLeftHandWeight();
+        }
+        public void WeaponGrabIsOver() 
+        {
+            _weaponVisual.SetBusyGrabbingWeaponTo(false);
+        }
     }
 }

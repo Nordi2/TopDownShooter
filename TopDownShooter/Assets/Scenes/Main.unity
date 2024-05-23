@@ -689,7 +689,9 @@ MonoBehaviour:
   _shotgun: {fileID: 6182767346999870948}
   _sniper: {fileID: 8057804917675797683}
   _machineGun: {fileID: 3924493548017166837}
+  _leftHandIKWeightIncreaseRate: 0
   _leftHand: {fileID: 1930441438}
+  _leftHandIK: {fileID: 1089289562}
   _rigInCreaseStep: 2
 --- !u!114 &648795724
 MonoBehaviour:
@@ -5205,10 +5207,10 @@ MonoBehaviour:
   _Editor_EnsureCount: 0
   _Editor_OnValidateTrigger: 1
   _EditorAllowAutoUpdateFeetParams: 1
-  _EditorCategory: 0
-  _EditorSetupCategory: 0
+  _EditorCategory: 1
+  _EditorSetupCategory: 1
   _EditorMotionCategory: 0
-  _EditorExtraCategory: 0
+  _EditorExtraCategory: 2
   IKHintMode: 0
   LimitLegStretch: 0.99
   FeetYOffset: 0
