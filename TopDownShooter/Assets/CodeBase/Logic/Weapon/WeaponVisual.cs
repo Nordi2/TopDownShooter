@@ -173,6 +173,6 @@ public class WeaponVisual : MonoBehaviour
 
     private void ReduceRigWeight()
     {
-        _rig.weight = 0.14f;
+        _rig.weight = 0f;
     }
 }
