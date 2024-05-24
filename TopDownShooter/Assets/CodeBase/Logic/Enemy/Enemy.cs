@@ -9,9 +9,6 @@ namespace Assets.CodeBase.Logic.Enemy
         public float turnSpeed;
         public float aggresionRange;
 
-        [Header("Attack data")]
-        public float attackRange;
-        public float attackMoveSpeed;
 
         [Header("Idle Info")]
         public float idleTime;
@@ -19,6 +16,7 @@ namespace Assets.CodeBase.Logic.Enemy
         public float moveSpeed;
         public float chaseSpeed;
         private bool manualMovement;
+        private bool manualRotation;
 
         [SerializeField] private Transform[] patrolPoints;
         private int currentPatrolIndex;
@@ -46,9 +44,11 @@ namespace Assets.CodeBase.Logic.Enemy
         }
         public void ActivateManualMovement(bool manualMovement) => this.manualMovement = manualMovement;
         public bool ManualMovementActive() => manualMovement;
+        public void ActivateManualRotation(bool manualRotation) => this.manualRotation = manualRotation;
+        public bool ManualRotationActive() => manualRotation;
+
         public void AnimationTrigger() => stateMachine.CurrentState.AnimationTrigger();
         public bool PlayerInAggresionRange() => Vector3.Distance(transform.position, player.position) < aggresionRange;
-        public bool PlayerInAttackRange() => Vector3.Distance(transform.position, player.position) < attackRange;
         public Vector3 GetPatrolDestination() 
         {
             Vector3 destination = patrolPoints[currentPatrolIndex].transform.position;
@@ -77,11 +77,9 @@ namespace Assets.CodeBase.Logic.Enemy
                 transform.parent = null;
             }
         }
-        private void OnDrawGizmos()
+        protected virtual void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(transform.position, aggresionRange);
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
         }
     }
 }

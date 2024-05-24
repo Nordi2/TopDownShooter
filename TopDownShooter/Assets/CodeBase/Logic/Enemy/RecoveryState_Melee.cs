@@ -1,5 +1,4 @@
 using Assets.CodeBase.Logic.Enemy;
-using UnityEngine;
 
 public class RecoveryState_Melee : EnemyState
 {
