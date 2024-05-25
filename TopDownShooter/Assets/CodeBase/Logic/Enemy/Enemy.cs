@@ -1,4 +1,3 @@
-using Assets.CodeBase.Logic.Player;
 using UnityEngine;
 using UnityEngine.AI;
 

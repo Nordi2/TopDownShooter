@@ -1,14 +1,12 @@
-using Assets.CodeBase.Logic.Enemy;
-
 public class EnemyStateMachine
 {
-    public EnemyState CurrentState { get; private set; }
-    public void Initialize(EnemyState startState)
+    public Assets.CodeBase.Logic.Enemy.EnemyState CurrentState { get; private set; }
+    public void Initialize(Assets.CodeBase.Logic.Enemy.EnemyState startState)
     {
         CurrentState = startState;
         CurrentState.Enter();
     }
-    public void ChangeState(EnemyState newState) 
+    public void ChangeState(Assets.CodeBase.Logic.Enemy.EnemyState newState) 
     {
         CurrentState.Exit();
         CurrentState = newState;

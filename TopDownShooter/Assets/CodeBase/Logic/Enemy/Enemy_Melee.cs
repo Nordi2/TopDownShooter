@@ -1,4 +1,5 @@
 using Assets.CodeBase.Logic.Enemy;
+using Assets.CodeBase.Logic.EnemyZombie;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,9 +17,9 @@ public struct AttackData
 public enum AttackType_Melee
 {
     Close,
-    Charge,
+    Charge
 }
-public class Enemy_Melee : Enemy
+public class Enemy_Melee : Assets.CodeBase.Logic.Enemy.Enemy
 {
     public IdleState_Melee IdleState { get; private set; }
     public MoveState_Melee MoveState { get; private set; }
