@@ -17,6 +17,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         }
         public virtual void Enter()
         {
+            _enemyBase.Animator.SetBool(_animBoolName, true);
         }
         public virtual void Update()
         {
@@ -24,6 +25,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         }
         public virtual void Exit()
         {
+            _enemyBase.Animator.SetBool(_animBoolName, false);
         }
     }
 }

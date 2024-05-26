@@ -13,11 +13,13 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         [SerializeField] private Transform[] _patrolPoints;
         private int _currentPatrolIndex;
         public NavMeshAgent Agent { get; private set; }
+        public Animator Animator { get; private set; }
         public EnemyStateMachine StateMachine { get; private set; }
         protected virtual void Awake()
         {
             StateMachine = new EnemyStateMachine();
             Agent = GetComponent<NavMeshAgent>();
+            Animator = GetComponentInChildren<Animator>();
         }
         protected virtual void Start()
         {

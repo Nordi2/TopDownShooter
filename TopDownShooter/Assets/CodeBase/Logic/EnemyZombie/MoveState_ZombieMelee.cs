@@ -20,6 +20,8 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         {
             base.Enter();
             _destination = _enemy.GetPatrolDestination();
+
+            _enemy.Agent.SetDestination(_destination);
         }
 
         public override void Exit()
@@ -30,7 +32,6 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         public override void Update()
         {
             base.Update();
-            _enemy.Agent.SetDestination(_destination);
 
             if (_enemy.Agent.remainingDistance <= 1)
             {
