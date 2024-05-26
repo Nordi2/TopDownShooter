@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Assets.CodeBase.Logic.EnemyZombie
 {
     public class EnemyState
@@ -21,7 +19,6 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         }
         public virtual void Update()
         {
-            _stateTimer -= Time.deltaTime;
         }
         public virtual void Exit()
         {

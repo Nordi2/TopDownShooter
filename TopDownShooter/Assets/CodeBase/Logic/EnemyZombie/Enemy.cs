@@ -5,16 +5,15 @@ namespace Assets.CodeBase.Logic.EnemyZombie
 {
     public class Enemy : MonoBehaviour
     {
-        [Header("Idle info")]
-        public float IdleTime;
+        public Transform _player;
         [Header("Move data")]
         public float MoveSpeed;
-
-        [SerializeField] private Transform[] _patrolPoints;
-        private int _currentPatrolIndex;
         public NavMeshAgent Agent { get; private set; }
         public Animator Animator { get; private set; }
         public EnemyStateMachine StateMachine { get; private set; }
+        private bool _isGetUp;
+        private bool _isMoveResurection;
+        private bool _isResurect;
         protected virtual void Awake()
         {
             StateMachine = new EnemyStateMachine();
@@ -28,26 +27,22 @@ namespace Assets.CodeBase.Logic.EnemyZombie
 
         private void InitializePatrolPoints()
         {
-            foreach (Transform t in _patrolPoints)
-            {
-                t.parent = null;
-            }
         }
 
         protected virtual void Update()
         {
 
         }
-        public Vector3 GetPatrolDestination()
-        {
-            Vector3 destination = _patrolPoints[_currentPatrolIndex].transform.position;
-
-            _currentPatrolIndex++;
-            if (_currentPatrolIndex >= _patrolPoints.Length)
-            {
-                _currentPatrolIndex = 0;
-            }
-            return destination;
-        }
+        public bool IsGetUp() =>
+            _isGetUp;
+        public void GetUp() =>
+            _isGetUp = true;
+        public void ActivayeMoveResurection(bool moveResurect) =>
+            _isMoveResurection = moveResurect;
+        public bool MovementResurectActive() =>
+            _isMoveResurection;
+        public void ActivateResurect(bool resurect) =>
+            _isResurect = resurect;
+        public bool ResurectActive() => _isResurect;
     }
 }

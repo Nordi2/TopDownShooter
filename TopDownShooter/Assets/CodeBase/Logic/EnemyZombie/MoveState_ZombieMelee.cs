@@ -19,9 +19,6 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         public override void Enter()
         {
             base.Enter();
-            _destination = _enemy.GetPatrolDestination();
-
-            _enemy.Agent.SetDestination(_destination);
         }
 
         public override void Exit()
@@ -32,11 +29,16 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         public override void Update()
         {
             base.Update();
-
-            if (_enemy.Agent.remainingDistance <= 1)
+            _destination = _enemy._player.position;
+            _enemy.Agent.SetDestination(_destination);
+            //if (_enemy.Agent.remainingDistance <= 1f)
+            //{              
+            //    _enemy.StateMachine.ChangeState(_enemy.AttackState);
+            //}
+            if (Vector3.Distance(_enemy.transform.position, _enemy._player.position) <= 1F)
             {
-                _stateMachine.ChangeState(_enemy.IdleState);
+                _enemy.StateMachine.ChangeState(_enemy.AttackState);
             }
-        }     
+        }
     }
 }

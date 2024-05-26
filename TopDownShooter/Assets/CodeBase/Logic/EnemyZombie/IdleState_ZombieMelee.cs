@@ -16,7 +16,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         public override void Enter()
         {
             base.Enter();
-            _stateTimer = _enemyBase.IdleTime;
+          //  _stateTimer = _enemyBase.IdleTime;
         }
 
         public override void Exit()
