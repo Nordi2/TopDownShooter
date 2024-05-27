@@ -1,5 +1,4 @@
 using Assets.CodeBase.Logic.Enemy;
-using Assets.CodeBase.Logic.EnemyZombie;
 using System.Collections.Generic;
 using UnityEngine;
 

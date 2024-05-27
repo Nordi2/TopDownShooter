@@ -9,9 +9,10 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         {
             _enemy = GetComponentInParent<Enemy>();
         }
-        public void OnGetUp() => _enemy.GetUp();
-        public void StartMoveResurection() => _enemy.ActivayeMoveResurection(true);
-        public void StopMoveResurection() => _enemy.ActivayeMoveResurection(false);
-        public void ResurectOff() => _enemy.ActivateResurect(true);
+        public void AnimationTrigger() => _enemy.AnimationTrigger();
+        public void StartManualMovement() => _enemy.ActivayeManualMovement(true);
+        public void StopManualMovement() => _enemy.ActivayeManualMovement(false);
+        public void StartManualRotation() => _enemy.ActivateManualRotation(true);
+        public void StopManualRotation() => _enemy.ActivateManualRotation(false);
     }
 }

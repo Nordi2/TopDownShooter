@@ -6,7 +6,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         protected EnemyStateMachine _stateMachine;
 
         protected string _animBoolName;
-        protected float _stateTimer;
+        protected bool _triggerCalled;
         public EnemyState(Enemy enemyBase, EnemyStateMachine stateMachine, string animBollName)
         {
             _enemyBase = enemyBase;
@@ -16,6 +16,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         public virtual void Enter()
         {
             _enemyBase.Animator.SetBool(_animBoolName, true);
+            _triggerCalled = false;
         }
         public virtual void Update()
         {
@@ -24,5 +25,6 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         {
             _enemyBase.Animator.SetBool(_animBoolName, false);
         }
+        public void AnimationTrigger() => _triggerCalled = true;
     }
 }

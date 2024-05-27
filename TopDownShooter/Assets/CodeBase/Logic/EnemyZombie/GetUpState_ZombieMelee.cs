@@ -23,7 +23,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         public override void Update()
         {
             base.Update();
-            if (_enemy.IsGetUp())
+            if (_triggerCalled)
             {
                 _enemy.StateMachine.ChangeState(_enemy.MoveState);
             }

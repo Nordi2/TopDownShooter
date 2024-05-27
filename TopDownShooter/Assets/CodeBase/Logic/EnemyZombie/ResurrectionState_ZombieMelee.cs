@@ -23,12 +23,12 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         public override void Update()
         {
             base.Update();
-            if (_enemy.MovementResurectActive())
+            if (_enemy.ManualMovementActive())
             {
                 Vector3 moveDirection = _enemy.transform.position + _enemy.transform.forward * 200f;
                 _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, moveDirection,0.5f* Time.deltaTime);
             }
-            if (_enemy.ResurectActive())
+            if (_triggerCalled)
             {
                 _enemy.StateMachine.ChangeState(_enemy.GetUpState);
             }

@@ -31,11 +31,12 @@ namespace Assets.CodeBase.Logic.EnemyZombie
             base.Update();
             _destination = _enemy._player.position;
             _enemy.Agent.SetDestination(_destination);
+            _enemy.transform.rotation = _enemy.FaceTarget(_enemy._player.position);
             //if (_enemy.Agent.remainingDistance <= 1f)
             //{              
             //    _enemy.StateMachine.ChangeState(_enemy.AttackState);
             //}
-            if (Vector3.Distance(_enemy.transform.position, _enemy._player.position) <= 1F)
+            if (Vector3.Distance(_enemy.transform.position, _enemy._player.position) <= 1f)
             {
                 _enemy.StateMachine.ChangeState(_enemy.AttackState);
             }

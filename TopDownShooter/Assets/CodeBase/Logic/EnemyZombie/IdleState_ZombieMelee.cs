@@ -27,10 +27,10 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         public override void Update()
         {
             base.Update();
-            if (_stateTimer < 0)
-            {
-                _stateMachine.ChangeState(_enemy.MoveState);
-            }
+            //if (_stateTimer < 0)
+            //{
+            //    _stateMachine.ChangeState(_enemy.MoveState);
+            //}
         }
     }
 }
