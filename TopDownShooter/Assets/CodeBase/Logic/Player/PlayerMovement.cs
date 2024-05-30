@@ -1,4 +1,5 @@
 using Assets.CodeBase.Services;
+using Assets.CodeBase.Logic.EnemyZombie;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,9 @@ namespace Assets.CodeBase.Logic.Player
 
         private InputService _inputService;
         private PlayerAnimation _playerAnimation;
+
+        //Тестирровние , потом удалить
+        public EnemyZombie_Melee enemy;
         [Inject]
         public void Construct(InputService inputServic)
         {
@@ -30,6 +34,10 @@ namespace Assets.CodeBase.Logic.Player
             _inputService.OnShoot -= OnShoot;
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                enemy.GetHit();
+            }
             ApplyMovement();
             AnimationController();
         }

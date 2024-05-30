@@ -22,6 +22,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         public MoveState_ZombieMelee MoveState { get; private set; }
         public AttackState_ZombieMelee AttackState { get; private set; }
         public RecoveryState_ZombieMelee RecoveryState { get; private set; }
+        public DeadState_ZombieMelee DeadState { get; private set; }
 
         [Header("Attack Data")]
         public AttackData AttackData;
@@ -34,6 +35,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
             MoveState = new MoveState_ZombieMelee(this, StateMachine, "Move");
             AttackState = new AttackState_ZombieMelee(this, StateMachine, "Attack");
             RecoveryState = new RecoveryState_ZombieMelee(this, StateMachine, "Recovery");
+            DeadState = new DeadState_ZombieMelee(this, StateMachine, "Resurection");
         }
         protected override void Start()
         {
@@ -44,6 +46,10 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         {
             base.Update();
             StateMachine.CurrentState.Update();
+        }
+        public override void GetHit()
+        {
+            StateMachine.ChangeState(DeadState);
         }
         public bool PlayerInAtackRange() => Vector3.Distance(transform.position, _player.position) < AttackData.AttackRange;
         protected override void OnDrawGizmos()

@@ -41,6 +41,10 @@ namespace Assets.CodeBase.Logic.EnemyZombie
             _manualRotation = manualRotation;
         public bool ManualRotationActive() =>
             _manualRotation;
+        public  virtual void GetHit() 
+        {
+            Debug.Log(gameObject.name);
+        }
         public Quaternion FaceTarget(Vector3 target)
         {
             Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);

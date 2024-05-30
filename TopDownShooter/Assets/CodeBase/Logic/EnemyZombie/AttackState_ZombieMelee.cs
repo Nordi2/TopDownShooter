@@ -21,6 +21,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
             _attackMoveSpeed = _enemy.AttackData.MoveSpeed;
             _enemy.Animator.SetFloat("AttackAnimationSpeed", _enemy.AttackData.AnimationSpeed);
             _enemy.Animator.SetFloat("AttackIndex", _enemy.AttackData.AttackIndex);
+            _enemy.Animator.SetFloat("SlashAttackIndex", Random.Range(0, 5));
 
             _enemy.Agent.isStopped = true;
             _enemy.Agent.velocity = Vector3.zero;
