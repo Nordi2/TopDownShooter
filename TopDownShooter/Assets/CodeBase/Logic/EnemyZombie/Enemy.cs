@@ -7,8 +7,6 @@ namespace Assets.CodeBase.Logic.EnemyZombie
     {
         public float TurnSpeed;
         public Transform _player;
-        [Header("Move data")]
-        public float MoveSpeed;
         public NavMeshAgent Agent { get; private set; }
         public Animator Animator { get; private set; }
         public EnemyStateMachine StateMachine { get; private set; }
@@ -50,6 +48,9 @@ namespace Assets.CodeBase.Logic.EnemyZombie
 
             float yRotation = Mathf.LerpAngle(currentEulerAngles.y, targetRotation.eulerAngles.y, TurnSpeed * Time.deltaTime);
             return Quaternion.Euler(currentEulerAngles.x, yRotation, currentEulerAngles.z);
+        }
+        protected virtual void OnDrawGizmos()
+        {
         }
     }
 }

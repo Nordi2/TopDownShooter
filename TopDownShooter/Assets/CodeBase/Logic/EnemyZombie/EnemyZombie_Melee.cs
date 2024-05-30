@@ -1,11 +1,31 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace Assets.CodeBase.Logic.EnemyZombie
 {
+    [System.Serializable]
+    public struct AttackData 
+    {
+        public string AttackName;
+        public float AttackRange;
+        public float MoveSpeed;
+        public float AttackIndex;
+        [Range(1,2)]
+        public float AnimationSpeed;
+        public AttackType_Melee AttackType;
+    }
+    public enum AttackType_Melee { Close,Charge}
     public class EnemyZombie_Melee : Enemy
     {
         public ResurrectionState_ZombieMelee ResurrectionState { get; private set; }
         public GetUpState_ZombieMelee GetUpState { get; private set; }
         public MoveState_ZombieMelee MoveState { get; private set; }
         public AttackState_ZombieMelee AttackState { get; private set; }
+        public RecoveryState_ZombieMelee RecoveryState { get; private set; }
+
+        [Header("Attack Data")]
+        public AttackData AttackData;
+        public List<AttackData> AttackList;
         protected override void Awake()
         {
             base.Awake();
@@ -13,6 +33,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
             GetUpState = new GetUpState_ZombieMelee(this, StateMachine, "GetUp");
             MoveState = new MoveState_ZombieMelee(this, StateMachine, "Move");
             AttackState = new AttackState_ZombieMelee(this, StateMachine, "Attack");
+            RecoveryState = new RecoveryState_ZombieMelee(this, StateMachine, "Recovery");
         }
         protected override void Start()
         {
@@ -24,6 +45,11 @@ namespace Assets.CodeBase.Logic.EnemyZombie
             base.Update();
             StateMachine.CurrentState.Update();
         }
-
+        public bool PlayerInAtackRange() => Vector3.Distance(transform.position, _player.position) < AttackData.AttackRange;
+        protected override void OnDrawGizmos()
+        {
+            base.OnDrawGizmos();
+            Gizmos.DrawWireSphere(transform.position, AttackData.AttackRange);
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
             //{              
             //    _enemy.StateMachine.ChangeState(_enemy.AttackState);
             //}
-            if (Vector3.Distance(_enemy.transform.position, _enemy._player.position) <= 1f)
+            if (_enemy.PlayerInAtackRange())
             {
                 _enemy.StateMachine.ChangeState(_enemy.AttackState);
             }
