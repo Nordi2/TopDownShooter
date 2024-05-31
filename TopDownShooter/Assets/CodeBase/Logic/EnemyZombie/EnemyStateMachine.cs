@@ -7,7 +7,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
         public void Initialize(EnemyState startState)
         {
             CurrentState = startState;
-            CurrentState.Exit();
+            CurrentState.Enter();
         }
         public void ChangeState(EnemyState newState)
         {

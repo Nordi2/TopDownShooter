@@ -30,7 +30,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
             }
             if (_triggerCalled)
             {
-                _enemy.StateMachine.ChangeState(_enemy.GetUpState);
+                 _enemy.StateMachine.ChangeState(_enemy.GetUpState);
             }
         }
     }
