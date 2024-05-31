@@ -15,7 +15,7 @@ namespace Assets.CodeBase.Logic.EnemyZombie
             _ragdollColliders = GetComponentsInChildren<Collider>();
             _ragdollRigidboied = GetComponentsInChildren<Rigidbody>();
 
-            // RagdollActive(false);
+             RagdollActive(false);
         }
 
         public void RagdollActive(bool active)
